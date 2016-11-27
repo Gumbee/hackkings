@@ -18,7 +18,7 @@ export class HomePage {
 		setTimeout(()=>{
 			switch (page) {
 				case "calendar":
-					this.navCtrl.setRoot(CalendarPage,{},{animate:true, direction: 'forward'});
+					this.navCtrl.push(CalendarPage,{},{animate:true, direction: 'forward'});
 					break;
 				case "pulse":
 					this.navCtrl.push(PulsePage);

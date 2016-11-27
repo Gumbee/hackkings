@@ -21,8 +21,8 @@ export class CalendarPage {
 	openPage(page: string) {
 		setTimeout(()=>{
 			switch (page) {
-				case "newtask":
-					this.navCtrl.push(CalendarPage);
+				case "tasker":
+					this.navCtrl.push(TaskerPage,{},{animate:true, direction: 'forward'});
 					break;
 				case "seeschedule":
 					break;

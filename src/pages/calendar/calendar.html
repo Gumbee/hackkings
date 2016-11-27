@@ -34,7 +34,7 @@
   </div>
 
   <div class="task-selector" [class.moveIn]="moveIn">
-    <button ion-button full color="secondary"><ion-icon name="md-add"></ion-icon>Add Tasks</button>
+    <button ion-button full color="secondary" (click)="openPage('tasker')"><ion-icon name="md-add"></ion-icon>Add Tasks</button>
     <button ion-button full color="tertiary"><ion-icon name="md-calendar"></ion-icon>See Schedule</button>
   </div>
 </ion-content>
