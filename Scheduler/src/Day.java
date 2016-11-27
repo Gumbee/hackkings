@@ -29,6 +29,9 @@ public class Day {
     public void addTask(Task task) {
         tasks.add(task);
         freeHours -= task.getHours();
+        if (freeHours < 0) {
+            free = false;
+        }
     }
 
     @Override

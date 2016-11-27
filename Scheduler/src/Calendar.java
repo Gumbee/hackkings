@@ -12,8 +12,12 @@ public class Calendar {
         intialiseDays();
     }
 
+    public static List<Day> getDays() {
+        return days;
+    }
+
     private void intialiseDays() {
-        for (int i = 1; i <= 30; i++) {
+        for (int i = 0; i < 30; i++) {
             days.add(new Day(i));
         }
     }

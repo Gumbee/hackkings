@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
  */
 public class Scheduler {
 
+    public static int today = 2;
+
     public static void main(String[] args) {
         Calendar calendar = new Calendar();
         List<Task> tasks = new ArrayList<>();
@@ -19,16 +21,80 @@ public class Scheduler {
     private static void schedule(Calendar calendar, List<Task> tasks) {
         tasks = sortTasksByPriorityThenByHours(tasks);
         tasks.forEach(t -> System.out.println(t.getPriority() + " " + t.getHours()));
+
+        tasks.forEach(t -> {
+            System.out.println("#####" + t.getName());
+            int days = t.getEndDate() - t.getStartDate();
+            int hoursCounter = t.getHours();
+            int ratio = t.getHours() / days;
+            /*
+            if (ratio > 3) {
+                while (hoursCounter > 0) {
+                    System.out.println(hoursCounter);
+                    for (int i = t.getStartDate(); i < t.getEndDate(); i++) {
+                        Day day = Calendar.getDays().get(i);
+                        if (day.isFree()) {
+
+                            if (day.getFreeHours() < ratio) {
+                                hoursCounter -= day.getFreeHours();
+                                day.addTask(new Task(t.getName(), day.getFreeHours()));
+                            } else {
+                                hoursCounter -= day.getFreeHours();
+                                day.addTask(new Task(t.getName(), ((day.getFreeHours() + ratio) / 2)));
+                            }
+                        }
+                        if (hoursCounter <= 0) {
+                            break;
+                        }
+                    }
+                }
+            } else {
+            */
+                int workingDays = t.getHours() / 4;
+            System.out.println(workingDays);
+            System.out.println(days);
+                int interval = Math.floorDiv(days, workingDays);
+                while (hoursCounter > 0) {
+                    System.out.println("Here!");
+                    for (int i = t.getStartDate(); i < t.getEndDate(); i++) {
+                        int bestDay = i;
+                        for (int j = i + 1; j < i + interval; j++) {
+                            if (j < Calendar.getDays().size()) {
+                                if (Calendar.getDays().get(j).getFreeHours() >=
+                                        Calendar.getDays().get(bestDay).getFreeHours()) {
+                                    bestDay = j;
+                                }
+                            }
+                        }
+                        Day day = Calendar.getDays().get(bestDay);
+                        System.out.println(hoursCounter + " " + bestDay + " " + interval);
+                        if (day.isFree()) {
+                            int hours = Math.min(day.getFreeHours(), Math.min(4, hoursCounter));
+                            day.addTask(new Task(t.getName(), hours));
+                            hoursCounter -= hours;
+                        }
+                        i = bestDay;
+                        if (hoursCounter <= 0) {
+                            break;
+                        }
+                    }
+                }
+           // }
+
+        });
+
+        Calendar.getDays().forEach(d -> System.out.println(d.toString()));
+
     }
 
 
 
     private static void initialiseTasks(List<Task> tasks) {
-        tasks.add(new Task("Maths", 8, 5, 8, 13));
+        tasks.add(new Task("Maths", 8, 5, 8, 18));
         tasks.add(new Task("Programming", 20, 7, 3, 12));
-        tasks.add(new Task("Compilers", 50, 10, 1, 30));
-        tasks.add(new Task("Stats", 10, 5, 6, 10));
-        tasks.add(new Task("Software Design", 4, 2, 19, 23));
+        tasks.add(new Task("Compilers", 50, 10, 1, 28));
+        tasks.add(new Task("Stats", 10, 5, 6, 17));
+        tasks.add(new Task("Software Design", 4, 2, 19, 27));
     }
 
     private static List<Task> sortTasksByPriorityThenByHours(List<Task> tasks) {

@@ -1,6 +1,8 @@
 /**
  * Created by Alessandro on 26/11/2016.
  */
+
+
 public class Task {
 
     private int hours;
@@ -41,4 +43,5 @@ public class Task {
     public int getEndDate() {
         return endDate;
     }
+
 }
