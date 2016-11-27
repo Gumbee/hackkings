@@ -23,8 +23,6 @@ export class CalendarPage {
 	showDay : any = false;
 	dayData : any = {};
 
-	index : any = 0;
-
 	constructor(public navCtrl: NavController, private navParams: NavParams) {
 		if(navParams.data.length > 0){
 			this.canEdit = false;

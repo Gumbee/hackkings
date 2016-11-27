@@ -21,7 +21,7 @@
   </ion-grid>
 
   <div class="calendar-container">
-    <ion-grid class="calendar" align="center" [class.active]="index==0">
+    <ion-grid class="calendar" align="center">  
       <ion-row *ngFor="let week of month;let e=index">
         <ion-col *ngFor="let day of week;let i=index" width-15 [class.active]="day.a">
           <ion-item tappable *ngIf="day.n" (click)="selectDay(e, i)"><p>{{day.n}}</p>
@@ -33,10 +33,10 @@
     </ion-grid>
   </div>
 
-  <div class="day-info" [class.day-info-show]="showDay">
+  <div class="day-info" [class.day-info-show]="showDay" *ngIf="dayData.tasks?.length>0">
     <ion-list>
       <ion-list-header>
-      Appointments
+      Tasks
       </ion-list-header>
       <ion-item *ngFor="let task of dayData.tasks" tappable>
         <ion-avatar item-left>
@@ -47,6 +47,16 @@
       </ion-item>
     </ion-list>
   </div>
+
+  <ion-list *ngIf="dayData.tasks?.length < 1">
+    <ion-item tappable>
+      <ion-avatar item-left>
+        <img src="https://cdn4.iconfinder.com/data/icons/web-development-5/500/window-javascript-coding-256.png">
+      </ion-avatar>
+      <h2>Introduction to programming</h2>
+      <p>Ugh. As if.</p>
+    </ion-item>
+  </ion-list>
 
   <div class="task-selector" [class.moveIn]="moveIn">
     <button ion-button full color="secondary" (click)="openPage('tasker')"><ion-icon name="md-add"></ion-icon>Add Tasks</button>

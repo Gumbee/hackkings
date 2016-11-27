@@ -4,14 +4,17 @@ import { NavController } from 'ionic-angular';
 import { CalendarPage } from '../calendar/calendar';
 import { PulsePage } from '../pulse/pulse';
 
+declare var cordova: any;
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
 
-	constructor(public navCtrl: NavController) {
+	task = "tasks"
 
+	constructor(public navCtrl: NavController) {
 	}
 
 	openPage(page: string) {
@@ -28,5 +31,7 @@ export class HomePage {
 			}	
 		}, 150);
 	}
+
+
 
 }

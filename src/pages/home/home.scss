@@ -38,4 +38,14 @@ page-home {
 		font-size: 20px;
 		color: #777;
 	}
+
+	ion-list-header,
+	.list-header-md {
+		background-color: #ddd;
+		font-size: 17px;
+	}
+
+	.card ion-segment {
+		background-color: #ddd;
+	}
 }

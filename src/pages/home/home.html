@@ -17,10 +17,39 @@
     </ion-grid>
   </div>
 
-
   <div class="card">
+    <ion-segment [(ngModel)]="task">
+      <ion-segment-button value="tasks">
+        Upcoming Tasks
+      </ion-segment-button>
+      <ion-segment-button value="prioritytasks">
+        Priority Tasks
+      </ion-segment-button>
+    </ion-segment>
 
 
+    <div [ngSwitch]="task">
+      <ion-list *ngSwitchCase="'tasks'">
+        <ion-item tappable>
+          <ion-avatar item-left>
+            <img src="https://cdn4.iconfinder.com/data/icons/web-development-5/500/window-javascript-coding-256.png">
+          </ion-avatar>
+          <h2>Introduction to programming</h2>
+          <p>Ugh. As if.</p>
+        </ion-item>
+      </ion-list>
+
+      <ion-list *ngSwitchCase="'prioritytasks'">
+        <ion-item tappable>
+          <ion-avatar item-left>
+            <img src="https://cdn4.iconfinder.com/data/icons/keynote-and-powerpoint-icons/256/Analytics_balls-256.png">
+          </ion-avatar>
+          <h2>Statistics</h2>
+          <p>Not that again! And it's even prioritized!.</p>
+        </ion-item>
+      </ion-list>
+    </div>
+    
   </div>
   
 </ion-content>
