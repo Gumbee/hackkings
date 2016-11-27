@@ -1,18 +1,49 @@
-<!--
-  Generated template for the Tasker page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
+<div class="successOverlay" *ngIf="eventAnimation.display">
+	<div  class="circle" [class.circleIn]="eventAnimation.circleIn"></div>
+	<div class="contentStuff" [class.fadeIn]="eventAnimation.fadeIn">
+		<ion-spinner name="crescent" color="primary" *ngIf="eventAnimation.loaderShow"></ion-spinner>
+		<h2 *ngIf="eventAnimation.textShow" [class.fadeIn]="eventAnimation.textFade">{{eventAnimation.textMsg}}</h2>
+	</div>
+</div>
+
 <ion-header>
-
   <ion-navbar color="primary">
     <ion-title>Tasker</ion-title>
+    <ion-buttons end>
+    	<button ion-button clear (click)="submitForm()"><ion-icon name="md-create"></ion-icon></button>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content>
+	<form>
+		<ion-list style="margin: 0;">
+			<ion-list-header padding-left>
+				Subjects
+			</ion-list-header>
+
+			<ion-item *ngFor="let subject of taskForm.subjects;let i=index" tappable>
+				<p>{{subject.name}}</p>
+				<button ion-button clear item-right style="padding-top: 15px;padding-bottom: 15px;" (click)="getDuration(i)" type="button">
+					<ion-icon name="ios-clock-outline" item-right style="font-size:30px"></ion-icon>
+				</button>
+				<ion-badge item-right>{{subject.duration}}</ion-badge>
+			</ion-item>
+
+			<ion-item class="form-padding">
+				<ion-label stacked>Subject</ion-label>
+				<button (click)="addSubject()" ion-button item-right type="button" clear class="subject-button">
+					Add Subject 
+					<ion-icon name="ios-add-circle-outline" style="font-size: 20px;margin-left: 10px;"></ion-icon>
+				</button>
+				<ion-input [(ngModel)]="subject.name" name="subject" (keyup.enter)="addSubject()" #input class="subject-input" type="text" placeholder=""></ion-input>
+			</ion-item>
+
+		</ion-list>
+
+	</form>
+
 
 </ion-content>

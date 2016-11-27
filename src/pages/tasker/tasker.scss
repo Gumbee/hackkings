@@ -1,3 +1,115 @@
 page-tasker {
 
+	ion-header .toolbar {
+		padding-right: 10px;
+	}
+
+	ion-header ion-buttons button ion-icon {
+		font-size: 22px;
+	}
+
+	.list-header-md {
+		background-color: #eee;
+		margin-bottom: 0;
+	}
+
+	.list,
+	.list .item-md,
+	.list .item-md button {
+		padding-right: 0px;
+	}
+
+	.list .item-md.item-label-stacked [item-right]{
+		color: #888;
+	}
+
+	.list .input-cover {
+		border-bottom: 1px solid #ddd;
+	}
+
+	.input-has-focus .input-cover {
+		display: block;
+	}
+
+	.item-md.item-input.input-has-focus .item-inner,
+	.item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner,
+	.item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner {
+		border-bottom: none;
+		box-shadow: none;
+	}
+
+	.subject-button {
+		position: absolute;
+		bottom: 0px;
+		right: 0px;
+	}
+
+	.subject-button.button-wp {
+		bottom: 2	px;
+	}
+
+	.subject-button ion-icon {
+		margin-left: 5px;
+	}
+
+	.subject-input {
+		padding-right: 100px;
+	}
+
+	.successOverlay {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		z-index: 11;
+	}
+
+	.successOverlay .circle {
+		width: 10rem;
+		height: 10rem;
+		border-radius: 100%;
+		position: absolute;
+		right: -1.8rem;
+		top: -2rem;
+		background-color: #eee;
+		transition: all 1s ease-in-out;
+		opacity: 1;
+		transform: scale(0.1);
+	}
+
+	.successOverlay .contentStuff {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		transition: all 0.5s ease-in-out;
+		opacity: 0;
+	}
+
+	.contentStuff ion-spinner {
+		margin-left: auto;
+		margin-right: auto;
+		position: relative;
+		display: block;
+		top: 50%;
+  		transform: translateY(-70%);
+	}
+
+	.contentStuff h2 {
+		font-size: 3.5rem;
+		text-align: center;
+		position: relative;
+		top: 50%;
+  		transform: translateY(-120%);
+		color: #666;
+		opacity: 0;
+		transition: all 0.5s ease-in-out;
+		font-family: "Trebuchet MS", Helvetica, sans-serif;
+	}
+
+	.fadeIn {
+		opacity: 1 !important;
+	}
+
+	.circleIn {
+		transform: scale(100) !important;
+	}
 }

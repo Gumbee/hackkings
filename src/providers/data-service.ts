@@ -11,8 +11,10 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class DataService {
 
-  constructor(public http: Http) {
-    console.log('Hello DataService Provider');
-  }
+	constructor(public http: Http) {
+
+	}
+
+	
 
 }
