@@ -23,8 +23,18 @@
   <div class="calendar-container">
     <ion-grid class="calendar" align="center" [class.active]="index==0">
       <ion-row *ngFor="let week of month;let e=index">
-        <ion-col *ngFor="let day of week;let i=index" width-15 [class.active]="day.a"><ion-item tappable *ngIf="day!=0" (click)="selectDay(e, i)"><p>{{day.n}}</p></ion-item></ion-col>
+        <ion-col *ngFor="let day of week;let i=index" width-15 [class.active]="day.a">
+          <ion-item tappable *ngIf="day.n" (click)="selectDay(e, i)"><p>{{day.n}}</p>
+          </ion-item>
+          <ion-item tappable *ngIf="!day.n" class="locked"><p>{{day}}</p>
+          </ion-item>
+        </ion-col>
       </ion-row>
     </ion-grid>
+  </div>
+
+  <div class="task-selector" [class.moveIn]="moveIn">
+    <button ion-button full color="secondary"><ion-icon name="md-add"></ion-icon>Add Tasks</button>
+    <button ion-button full color="tertiary"><ion-icon name="md-calendar"></ion-icon>See Schedule</button>
   </div>
 </ion-content>

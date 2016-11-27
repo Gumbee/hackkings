@@ -45,7 +45,38 @@ page-calendar {
 	.active .input-wrapper {
 		background-color: #ecf0f1;
 	}
+
 	.active .input-wrapper ion-label p {
+	}
+
+	.task-selector .button ion-icon {
+		margin-right: 10px;
+	}
+
+
+	.task-selector .button,
+	.task-selector .button-md.activated {
+		margin: 0;
+		box-shadow: none;
+	}
+	
+	.task-selector .button {
+		position: relative;
+	    transition: all 0.3s ease-in-out;
+	    transform: translateX(-100%);
+	}
+
+	.task-selector .button:nth-child(2) {
+	    transform: translateX(100%);
+	}
+
+	.task-selector.moveIn .button {
+	    transform: translateX(0);
+		opacity: 1;
+	}
+
+	.locked ion-label p {
+		color: #bbb;
 	}
 
 }

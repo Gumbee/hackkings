@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-
 import { NavController } from 'ionic-angular';
+
+import { TaskerPage } from '../tasker/tasker';
 
 @Component({
   selector: 'page-calendar',
@@ -8,11 +9,27 @@ import { NavController } from 'ionic-angular';
 })
 export class CalendarPage {
 
-	month: any[][] = [[{n:1,a:0},{n:2,a:0},{n:3,a:0},{n:4,a:0},{n:5,a:0},{n:6,a:0},{n:7,a:0}],[{n:8,a:0},{n:9,a:0},{n:10,a:0},{n:11,a:0},{n:12,a:0},{n:13,a:0},{n:14,a:0}],[{n:15,a:0},{n:16,a:0},{n:17,a:0},{n:18,a:0},{n:19,a:0},{n:20,a:0},{n:21,a:0}],[{n:22,a:0},{n:23,a:0},{n:24,a:0},{n:25,a:0},{n:26,a:0},{n:27,a:0},{n:28,a:0}],[{n:29,a:0},{n:30,a:0},{n:31,a:0},0,0,0,0]];
+	month: any[][] = [[{n:1,a:0},{n:2,a:0},{n:3,a:0},{n:4,a:0},{n:5,a:0},{n:6,a:0},{n:7,a:0}],[{n:8,a:0},{n:9,a:0},{n:10,a:0},{n:11,a:0},{n:12,a:0},{n:13,a:0},{n:14,a:0}],[{n:15,a:0},{n:16,a:0},{n:17,a:0},{n:18,a:0},{n:19,a:0},{n:20,a:0},{n:21,a:0}],[{n:22,a:0},{n:23,a:0},{n:24,a:0},{n:25,a:0},{n:26,a:0},{n:27,a:0},{n:28,a:0}],[{n:29,a:0},{n:30,a:0},{n:31,a:0},1,2,3,4]];
 	hasSelected = [];
+
+	moveIn = false;
 
 	constructor(public navCtrl: NavController) {
 
+	}
+
+	openPage(page: string) {
+		setTimeout(()=>{
+			switch (page) {
+				case "newtask":
+					this.navCtrl.push(CalendarPage);
+					break;
+				case "seeschedule":
+					break;
+				default:
+					break;
+			}	
+		}, 150);
 	}
 
 	selectDay(row: number,index: number){
@@ -25,6 +42,8 @@ export class CalendarPage {
 					}
 				}
 			}
+			this.moveIn = false;
+			this.hasSelected = [];
 			return;
 		}
 
@@ -59,6 +78,9 @@ export class CalendarPage {
 					ia++;
 				}
 			}	
+
+			this.moveIn = true;
+
 			this.hasSelected = []
 			this.hasSelected[this.hasSelected.length] = {row:row, index:index};
 

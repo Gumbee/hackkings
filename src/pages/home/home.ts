@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 import { CalendarPage } from '../calendar/calendar';
+import { PulsePage } from '../pulse/pulse';
 
 @Component({
   selector: 'page-home',
@@ -17,7 +18,10 @@ export class HomePage {
 		setTimeout(()=>{
 			switch (page) {
 				case "calendar":
-					this.navCtrl.push(CalendarPage);
+					this.navCtrl.setRoot(CalendarPage,{},{animate:true, direction: 'forward'});
+					break;
+				case "pulse":
+					this.navCtrl.push(PulsePage);
 					break;
 				default:
 					break;

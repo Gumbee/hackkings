@@ -10,7 +10,7 @@ import { CalendarPage } from '../pages/calendar/calendar';
   template: `<ion-nav [root]="rootPage"></ion-nav>`
 })
 export class MyApp {
-  rootPage = CalendarPage;
+  rootPage = HomePage;
 
   constructor(platform: Platform) {
     platform.ready().then(() => {
