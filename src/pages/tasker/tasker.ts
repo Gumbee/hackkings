@@ -1,7 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
+import { NavController, AlertController, NavParams, ViewController } from 'ionic-angular';
 
-import { BubbleButtonComponent } from '../../components/bubble-button/bubble-button';
+import { HomePage } from '../../pages/home/home';
+import { CalendarPage } from '../../pages/calendar/calendar';
 
 /*
   Generated class for the Tasker page.
@@ -30,24 +31,30 @@ export class TaskerPage {
 	taskForm : any = {subjects:[]};
 	subject : any = {};
 
-	constructor(public navCtrl: NavController, private alertCtrl: AlertController) {
-		
+	startDate = 0;
+	endDate = 0;
+
+	constructor(public navCtrl: NavController, private alertCtrl: AlertController, private navParams: NavParams) {
+		this.startDate = navParams.data.startDate;
+		this.endDate = navParams.data.endDate;
+
+		console.log("Params: " + this.startDate + " - " + this.endDate);
 	}
 
 	submitForm(){
 		this.animateSubmit();
 		setTimeout(()=>{
-			this.animateText("Schedule is beeing computed...");
+			this.animateText("Schedule is being computed...");
 			
 			let that = this;
 
 			var worker = new Worker('assets/service-worker.js');
-			worker.postMessage(this.eventAnimation);
+			worker.postMessage(this.taskForm.subjects);
 
 			worker.onmessage = function(event) {
-				console.log("Worker data arrived.")
 				setTimeout(()=>{
-					that.navCtrl.pop();
+					that.navCtrl.popToRoot();
+					that.navCtrl.push(CalendarPage, event.data, {animate: true, direction: 'forward'});
 				}, 4000);
 			};
 
@@ -56,7 +63,8 @@ export class TaskerPage {
 
 	addSubject() {
 		if(this.subject.name !== undefined && this.subject.name.trim() != ''){
-			this.taskForm.subjects.push({name: this.subject.name, duration: "00:00"});
+			this.taskForm.subjects.push({name: this.subject.name, duration: "01:00", hours: 1, priority: 1, startDate: this.startDate, endDate: this.endDate});
+			console.log(this.taskForm.subjects[this.taskForm.subjects.length-1]);
 			this.subject = {name:''};
 			this.input.setFocus();
 		}
@@ -101,6 +109,7 @@ export class TaskerPage {
 					}
 
 					this.taskForm.subjects[id].duration = output;
+					this.taskForm.subjects[id].hours = hours;
 				}
 			}
 			]

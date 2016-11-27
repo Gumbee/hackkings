@@ -1,5 +1,3 @@
-var data = [];
-
 var Calendar = function(){
 	this.days = [];
 
@@ -22,16 +20,18 @@ var Task = function(name, hours, priority, startDate, endDate){
 	this.absolutePriority = hours/(endDate-startDate);
 }
 
-var Scheduler = function(){
+var Scheduler = function(data){
 	this.calendar = new Calendar();
 	this.tasks = [];
 
-	this.initializeTasks();
+	this.initializeTasks(data);
 	this.schedule();
 
 	for(var i=0;i<this.calendar.days.length;i++){
 		this.calendar.days[i].printTasks();
 	}
+
+	postMessage(this.calendar.days);
 }
 
 Calendar.prototype.initializeDays = function() {
@@ -65,14 +65,18 @@ Scheduler.prototype.schedule = function(tasks) {
 
 		var interval = Math.floor((days/workingDays));
 
-		while(hoursCounter>0){
+		var iterations = 0;
+
+		while(hoursCounter>0 && iterations < this.tasks.length){
 			console.log(this.tasks);
-			for (var j=this.tasks[i].startDate;j<this.tasks[i].endDate;j++) {
+			console.log(this.tasks[i]);
+			for (var j=this.tasks[i].startDate-1;j<this.tasks[i].endDate-1;j++) {
 				var bestDay = j;
 
-				for (var k=j+1;k<j+interval;k++) {
+				for (var k=j+1;k<j+interval && k<this.tasks[i].endDate;k++) {
 					if (k < this.calendar.days.length) {
 						if (this.calendar.days[k].freeHours >= this.calendar.days[bestDay].freeHours) {
+							console.log(this.calendar.days[k]);
 							bestDay = k;
 						}
 					}
@@ -90,34 +94,34 @@ Scheduler.prototype.schedule = function(tasks) {
 				if (hoursCounter <= 0) {
 					break;
 				}
+
 			}
 
+			iterations++;
 		}
 
 	}
 }
 
-Scheduler.prototype.initializeTasks = function(){
-    this.tasks[this.tasks.length] = new Task("Maths", 8, 5, 8, 13);
-    this.tasks[this.tasks.length] = new Task("Programming", 20, 7, 3, 12);
-    this.tasks[this.tasks.length] = new Task("Compilers", 50, 10, 1, 28);
-    this.tasks[this.tasks.length] = new Task("Stats", 10, 5, 6, 17);
-    this.tasks[this.tasks.length] = new Task("Software Design", 10, 2, 19, 23);
+Scheduler.prototype.initializeTasks = function(data){
+	for(var i=0;i<data.length;i++){
+		this.tasks[this.tasks.length] = new Task(data[i].name, data[i].hours, data[i].priority, data[i].startDate, data[i].endDate);
+	}
 }
 
 Scheduler.prototype.sortTasksByPriorityThenByHours = function(a, b){
     
     if(a.absolutePriority > b.absolutePriority){
     	return true;
-    }else if(a.absolutePriority == b.absolutePriority){
+    }else if(a.priority == b.priority){
     	return a.hours > b.hours;
     }else{
     	return false;
     }
 }
 
-var scheduler = new Scheduler();
 
 onmessage = function(data) {
-	this.data = data.data;
+	var userData = data.data;
+	var scheduler = new Scheduler(userData);
 }

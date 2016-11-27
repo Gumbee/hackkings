@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 
 import { TaskerPage } from '../tasker/tasker';
 
@@ -13,16 +13,29 @@ export class CalendarPage {
 	hasSelected = [];
 
 	moveIn = false;
+	canEdit = true;
 
-	constructor(public navCtrl: NavController) {
+	startDate = 31;
+	endDate = 0;
 
+	data = [];
+
+	showDay = false;
+	dayData = {};
+
+	constructor(public navCtrl: NavController, private navParams: NavParams) {
+		if(navParams.data.length > 0){
+			this.canEdit = false;
+			this.data = navParams.data;
+			this.updateCalendar();
+		}
 	}
 
 	openPage(page: string) {
 		setTimeout(()=>{
 			switch (page) {
 				case "tasker":
-					this.navCtrl.push(TaskerPage,{},{animate:true, direction: 'forward'});
+					this.navCtrl.push(TaskerPage,{startDate: this.startDate, endDate: this.endDate, currentDays:this.data}, {animate: true, direction: 'forward'});
 					break;
 				case "seeschedule":
 					break;
@@ -33,23 +46,34 @@ export class CalendarPage {
 	}
 
 	selectDay(row: number,index: number){
+		this.showInfo(row, index);
 		// delete all selections if a selected element is selected again
 		if(this.month[row][index].a == true){
 			for(let week of this.month){
 				for(let day of week){
-					if(day.a != undefined){
+					if(day.a != undefined && this.data[day.n] == undefined || (this.data[day.n] != undefined && this.data[day.n].tasks.length < 1)){
 						day.a = false;
 					}
 				}
 			}
 			this.moveIn = false;
 			this.hasSelected = [];
+			this.startDate = 31;
+			this.endDate = 0;
 			return;
 		}
 
 		this.month[row][index].a = true;
 
 		this.hasSelected[this.hasSelected.length] = {row:row, index:index};
+
+		if(this.month[row][index].n < this.startDate){
+			this.startDate = this.month[row][index].n;
+		}
+
+		if(this.month[row][index].n > this.endDate){
+			this.endDate = this.month[row][index].n;
+		}
 		
 		// select all elements between the two selected elements that are farthest away
 		if(this.hasSelected.length>1){
@@ -87,6 +111,27 @@ export class CalendarPage {
 		}
 
 
+	}
+
+	updateCalendar() {
+		let i = 0;
+		let j = 0;
+
+		for(let week of this.month){
+			for(let day of week){
+				if(day.a != undefined && day.n != undefined && this.data[day.n] != undefined && this.data[day.n].freeHours < 6){
+					day.a = true;
+				}
+			}
+		}
+		return;
+	}
+
+	showInfo(row, index){
+		if(this.data[this.month[row][index].n] != undefined && this.data[this.month[row][index].n].tasks.length>0){
+			this.showDay = true;
+			this.dayData = this.data[this.month[row][index].n];
+		}
 	}
 
 }

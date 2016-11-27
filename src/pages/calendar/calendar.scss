@@ -25,8 +25,8 @@ page-calendar {
 	}
 
 	.calendar .item div,
-	.item-md.item-block .item-inner,
-	.item-block .item-inner {
+	.calendar .item-md.item-block .item-inner,
+	.calendar .item-block .item-inner {
 		text-align: center;
 		margin: auto;
 		width: 100%;
@@ -77,6 +77,30 @@ page-calendar {
 
 	.locked ion-label p {
 		color: #bbb;
+	}
+
+	.day-info {
+		width: 100%;
+		transition: opacity 0.3s ease-in-out;
+		opacity: 0;
+		overflow: hidden;
+	}
+
+	.day-info ion-list-header {
+		background-color: #eee;
+		margin-bottom: 0;
+	}
+
+	.day-info ion-item {
+		border-bottom: 1px solid #eee;
+	}
+
+	.day-info ion-item .item-inner {
+		border-bottom: none;
+	}
+
+	.day-info-show {
+		opacity: 1;
 	}
 
 }

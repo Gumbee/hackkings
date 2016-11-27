@@ -33,6 +33,21 @@
     </ion-grid>
   </div>
 
+  <div class="day-info" [class.day-info-show]="showDay">
+    <ion-list>
+      <ion-list-header>
+      Appointments
+      </ion-list-header>
+      <ion-item *ngFor="let task of dayData.tasks" tappable>
+        <ion-avatar item-left>
+          <img src="https://cdn4.iconfinder.com/data/icons/web-development-5/500/calendar-date-month-planner-256.png">
+        </ion-avatar>
+        <h2>{{task.name}}</h2>
+        <p>Ugh. As if.</p>
+      </ion-item>
+    </ion-list>
+  </div>
+
   <div class="task-selector" [class.moveIn]="moveIn">
     <button ion-button full color="secondary" (click)="openPage('tasker')"><ion-icon name="md-add"></ion-icon>Add Tasks</button>
     <button ion-button full color="tertiary"><ion-icon name="md-calendar"></ion-icon>See Schedule</button>
