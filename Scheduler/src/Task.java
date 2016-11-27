@@ -9,6 +9,7 @@ public class Task {
     private int priority;
     private int startDate;
     private int endDate;
+    private double absolutePriority;
     private String name;
 
     public Task(String name, int hours, int priority, int startDate, int endDate) {
@@ -17,6 +18,7 @@ public class Task {
         this.priority = priority;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.absolutePriority = (double) hours / (double) (endDate - startDate);
     }
 
     public Task(String name, int hours) {
@@ -44,4 +46,7 @@ public class Task {
         return endDate;
     }
 
+    public double getAbsolutePriority() {
+        return absolutePriority;
+    }
 }

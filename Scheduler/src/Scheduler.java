@@ -15,10 +15,10 @@ public class Scheduler {
         Calendar calendar = new Calendar();
         List<Task> tasks = new ArrayList<>();
         initialiseTasks(tasks);
-        schedule(calendar, tasks);
+        schedule(tasks);
     }
 
-    private static void schedule(Calendar calendar, List<Task> tasks) {
+    private static void schedule(List<Task> tasks) {
         tasks = sortTasksByPriorityThenByHours(tasks);
         tasks.forEach(t -> System.out.println(t.getPriority() + " " + t.getHours()));
 
@@ -26,31 +26,7 @@ public class Scheduler {
             System.out.println("#####" + t.getName());
             int days = t.getEndDate() - t.getStartDate();
             int hoursCounter = t.getHours();
-            int ratio = t.getHours() / days;
-            /*
-            if (ratio > 3) {
-                while (hoursCounter > 0) {
-                    System.out.println(hoursCounter);
-                    for (int i = t.getStartDate(); i < t.getEndDate(); i++) {
-                        Day day = Calendar.getDays().get(i);
-                        if (day.isFree()) {
-
-                            if (day.getFreeHours() < ratio) {
-                                hoursCounter -= day.getFreeHours();
-                                day.addTask(new Task(t.getName(), day.getFreeHours()));
-                            } else {
-                                hoursCounter -= day.getFreeHours();
-                                day.addTask(new Task(t.getName(), ((day.getFreeHours() + ratio) / 2)));
-                            }
-                        }
-                        if (hoursCounter <= 0) {
-                            break;
-                        }
-                    }
-                }
-            } else {
-            */
-                int workingDays = t.getHours() / 4;
+            int workingDays = t.getHours() / 4;
             System.out.println(workingDays);
             System.out.println(days);
                 int interval = Math.floorDiv(days, workingDays);
@@ -90,15 +66,16 @@ public class Scheduler {
 
 
     private static void initialiseTasks(List<Task> tasks) {
-        tasks.add(new Task("Maths", 8, 5, 8, 18));
+        tasks.add(new Task("Maths", 8, 5, 8, 13));
         tasks.add(new Task("Programming", 20, 7, 3, 12));
         tasks.add(new Task("Compilers", 50, 10, 1, 28));
         tasks.add(new Task("Stats", 10, 5, 6, 17));
-        tasks.add(new Task("Software Design", 4, 2, 19, 27));
+        tasks.add(new Task("Software Design", 10, 2, 19, 23));
     }
 
     private static List<Task> sortTasksByPriorityThenByHours(List<Task> tasks) {
-        tasks = tasks.stream().sorted(Comparator.comparing(Task::getPriority).thenComparing(Task::getHours)).collect(Collectors.toList());
+        tasks = tasks.stream().sorted(Comparator.comparing(Task::getAbsolutePriority).
+                thenComparing(Task::getPriority)).collect(Collectors.toList());
         Collections.reverse(tasks);
         return tasks;
     }
