@@ -67,7 +67,7 @@ Scheduler.prototype.schedule = function(tasks) {
 
 		var iterations = 0;
 
-		while(hoursCounter>0 && iterations < this.tasks.length){
+		while(hoursCounter>0 && iterations < this.tasks.length*2){
 			console.log(this.tasks);
 			console.log(this.tasks[i]);
 			for (var j=this.tasks[i].startDate-1;j<this.tasks[i].endDate-1;j++) {
