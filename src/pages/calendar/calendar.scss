@@ -1,0 +1,51 @@
+page-calendar {
+
+	ion-navbar {
+		box-shadow: none;
+	}
+
+	.calendar-days {
+		color: #fff;
+		background-color: map-get($colors, primary);
+		box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.45);
+		z-index: 1;
+		position: relative;
+	}
+
+	.calendar-container {
+		max-height: 280px;
+		overflow: scroll;
+	}
+
+	.calendar ion-item,
+	.calendar ion-item ion-label {
+		padding-left: 0;
+		padding-right: 0;
+		margin-right: 0;
+	}
+
+	.calendar .item div,
+	.item-md.item-block .item-inner,
+	.item-block .item-inner {
+		text-align: center;
+		margin: auto;
+		width: 100%;
+		padding-right: 0;
+		border-bottom: none;
+	}
+
+	.calendar-container ion-item {
+		float: left;
+	}
+
+	.calendar-container ion-col {
+		border-radius: 100%;
+	}
+
+	.active .input-wrapper {
+		background-color: #ecf0f1;
+	}
+	.active .input-wrapper ion-label p {
+	}
+
+}

@@ -1,3 +1,41 @@
 page-home {
 
+	.dashboard {
+		font-family: 'Titillium Web', sans-serif;
+		background-color: #ecf0f1;
+		width: 100%;
+	}
+
+	.dashboard h1 {
+		font-size: 90px;
+		color: #555;
+		margin-bottom: 0px;
+		margin-top: 0px;
+	}
+
+	.dashboard-buttons button {
+		padding: 30px 20px;
+	}
+
+	.dashboard-buttons ion-icon {
+		font-size: 40px;
+		color: #666;
+	}
+
+	.card {
+		width: 100%;
+		height: 400px;
+		background-color: #fff;
+	}
+
+	.light {
+		font-size: 60px;
+		color: #666;
+	}
+
+	.subtext {
+		margin-top: -5px;
+		font-size: 20px;
+		color: #777;
+	}
 }

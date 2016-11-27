@@ -1,17 +1,26 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Home</ion-title>
+  <ion-navbar color="primary">
+    <ion-title align="center">Dashboard</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+<ion-content>
+  <div class="dashboard">
+    <h1 align="center" class="dashboardH1">4<span class="light">H</span>07<span class="light">M</span></h1>
+    <p align="center" class="subtext">worked this week</p>
+    <ion-grid class="dashboard-buttons">
+      <ion-row>
+        <ion-col width-33 align="center"><button ion-button clear (click)="openPage('')"><ion-icon name="md-alarm"></ion-icon></button></ion-col>
+        <ion-col width-33 align="center"><button ion-button clear (click)="openPage('calendar')"><ion-icon name="md-calendar"></ion-icon></button></ion-col>
+        <ion-col width-33 align="center"><button ion-button clear (click)="openPage('')"><ion-icon name="md-pulse"></ion-icon></button></ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+
+  <div class="card">
+
+
+  </div>
+  
 </ion-content>

@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>
+      Schedule
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-grid class="calendar-days" align="center">
+    <ion-row>
+      <ion-col width-15>SUN</ion-col>
+      <ion-col width-15>MON</ion-col>
+      <ion-col width-15>TUE</ion-col>
+      <ion-col width-15>WED</ion-col>
+      <ion-col width-15>THU</ion-col>
+      <ion-col width-15>FRI</ion-col>
+      <ion-col width-15>SAT</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="calendar-container">
+    <ion-grid class="calendar" align="center" [class.active]="index==0">
+      <ion-row *ngFor="let week of month;let e=index">
+        <ion-col *ngFor="let day of week;let i=index" width-15 [class.active]="day.a"><ion-item tappable *ngIf="day!=0" (click)="selectDay(e, i)"><p>{{day.n}}</p></ion-item></ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>
