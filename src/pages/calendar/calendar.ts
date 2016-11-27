@@ -10,18 +10,20 @@ import { TaskerPage } from '../tasker/tasker';
 export class CalendarPage {
 
 	month: any[][] = [[{n:1,a:0},{n:2,a:0},{n:3,a:0},{n:4,a:0},{n:5,a:0},{n:6,a:0},{n:7,a:0}],[{n:8,a:0},{n:9,a:0},{n:10,a:0},{n:11,a:0},{n:12,a:0},{n:13,a:0},{n:14,a:0}],[{n:15,a:0},{n:16,a:0},{n:17,a:0},{n:18,a:0},{n:19,a:0},{n:20,a:0},{n:21,a:0}],[{n:22,a:0},{n:23,a:0},{n:24,a:0},{n:25,a:0},{n:26,a:0},{n:27,a:0},{n:28,a:0}],[{n:29,a:0},{n:30,a:0},{n:31,a:0},1,2,3,4]];
-	hasSelected = [];
+	hasSelected : any = [];
 
-	moveIn = false;
-	canEdit = true;
+	moveIn : any = false;
+	canEdit : any = true;
 
-	startDate = 31;
-	endDate = 0;
+	startDate : any = 31;
+	endDate : any = 0;
 
-	data = [];
+	data : any = [];
 
-	showDay = false;
-	dayData = {};
+	showDay : any = false;
+	dayData : any = {};
+
+	index : any = 0;
 
 	constructor(public navCtrl: NavController, private navParams: NavParams) {
 		if(navParams.data.length > 0){
